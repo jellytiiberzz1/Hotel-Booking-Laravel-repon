@@ -1,0 +1,129 @@
+a{
+    text-decoration: none;
+}
+
+.container{
+    height: 100%;
+    width: 100%;
+}
+.content{
+    height: 440px;
+    width: 450px;
+    background-color: white;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 120px;
+}
+.tkk{
+    height: 30px;
+    border-top:none;
+    border-left: none;
+    border-right:none;
+    margin-left: 25px;
+    text-align: center;
+    color: black;
+    width: 400px;
+    
+}
+.tkk2{
+    margin-top: 5px;
+    
+    height: 30px;
+    border-top:none;
+    border-left: none;
+    border-right:none;
+    margin-left: 25px;
+    text-align: center;
+    color: black;
+    width: 400px;
+    
+}
+.tk{
+    width: 400px;
+}
+.checkbox-quenmk{
+    width: 450px;
+    display: inline-block;
+}
+.checkbox{
+    float: left;
+    padding-left: 30px;
+    margin-top:15px;
+}
+.quenmk{
+    float: right;
+    padding-right: 30px;
+    margin-top:15px;
+}
+.btndangnhap{
+    width: 200px;
+    height: 35px;
+    background-color: red;
+    border: 1px solid white;
+    color: white;
+    margin-left:120px;
+    border-radius: 7px;
+    margin-top:20px;
+    font-size: 16px;
+}
+.btndangnhap:hover{
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+}
+.fb-gg{
+    width: 400px;
+    height: 30px;
+    display: inline-block;
+    margin-left: 25px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.fb{
+    float: left;
+    border: 1px solid white;
+    background-color: blue;
+    color: white;
+    width: 190px;
+    height: 30px;
+    padding-bottom: 15px;
+    display: inline-block;
+}
+.fb:hover{
+    background-color: white;
+    color: blue;
+    border: 1px solid blue;
+}
+.fb-left{
+    padding-left: 20px;
+    padding-top:11px;
+    width: 50px;
+    float:left;
+}
+.fb-right{
+    width: 140px;
+}
+.gg{
+    float: right;
+    border: 1px solid white;
+    background-color: red;
+    color: white;
+    width: 190px;
+    height: 30px;
+    padding-bottom: 15px;
+    
+}
+.gg:hover{
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+}
+.gg-left{
+    padding-left: 20px;
+    padding-top:11px;
+    width: 50px;
+    float:left;
+}
+.gg-right{
+    width: 140px;
+}

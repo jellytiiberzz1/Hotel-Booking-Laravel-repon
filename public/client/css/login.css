@@ -1,0 +1,74 @@
+.right-w3l{
+    margin: auto;
+    text-align: center;
+}
+.btn-warning{
+    width: 200px;
+    height: 50px;
+    text-align: center
+}
+.form-group .form-control{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+.division{
+    float: none;
+    margin: 18px auto 18px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+.division .line {
+    border-top: 1px solid #DFDFDF;
+    position: absolute;
+    top: 10px;
+    width: 40%;
+}
+.division .line.l {
+    left: 0;
+}
+.division .line.r {
+    right: 0;
+}
+.division span {
+    color: #424242;
+    font-size: 17px;
+}
+.social {
+    float: none;
+    margin: 0 auto 30px;
+    text-align: center;
+}
+.social .circle{
+    background-color: #EEEEEE;
+    color: #FFFFFF;
+    border-radius: 100px;
+    margin:  3px;
+    padding: 10px;
+}
+.social .circle .fa{
+    font-size: 16px;
+}
+.social .facebook{
+    background-color: #455CA8;
+    color: #FFFFFF;
+}
+.social .google{
+    background-color: #F74933;
+}
+.facebook:hover{
+    background-color:#082384
+}
+.google:hover{
+    background-color: #c12919;
+}
+ .fa-google-plus-square{
+    padding: 2px;
+    font-size: 10px;
+}
+.fa-facebook-square{
+     padding: 2px;
+     font-size: 10px;
+}
