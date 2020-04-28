@@ -1,7 +1,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>&copy; 2019. <a href="#">Project Booking Hotel</a> by <a href="" target="_blank">Đức Thạch</a></span>
+            <span>&copy; 2019. <a href="#">Project Booking Hotel</a> by <a href="https://www.facebook.com/nducthach" target="_blank">Đức Thạch</a></span>
         </div>
     </div>
 </footer>
@@ -29,10 +29,10 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Chọn "Logout" đê xác nhận.</div>
+            <div class="modal-body">Chọn "Logout" để xác nhận.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="logout">Logout</a>
+                <a class="btn btn-primary" href="{{'logout'}}">Logout</a>
             </div>
         </div>
     </div>
@@ -61,11 +61,11 @@
 
 @if(session('thongbao'))
     <script type="text/javascript">
-        toastr.success('{{ session('thongbao') }}', 'Thông báo', {timeOut: 5000});
+        toastr.success('{{ session('thongbao') }}', 'Thông báo', {timeOut: 500});
     </script>
 @endif
 @if(session('error'))
     <script type="text/javascript">
-        toastr.error('{{ session('error') }}', 'Thông báo', {timeOut: 5000});
+        toastr.error('{{ session('error') }}', 'Thông báo', {timeOut: 500});
     </script>
 @endif

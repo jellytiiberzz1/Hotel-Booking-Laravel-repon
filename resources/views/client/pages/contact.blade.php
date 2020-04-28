@@ -1,6 +1,7 @@
 @extends('client.layout.master')
 @section('title')Liên Hệ
 @endsection
+
 <div class="hero-wrap" style="background-image: url('{{asset('client/images/bg_1.jpg')}}');">
     <div class="overlay"></div>
     <div class="container">
@@ -29,34 +30,34 @@
             </div>
             <div class="col-md-3 d-flex">
                 <div class="info bg-white p-4">
-                    <p><span>Số điện thoại</span> <a href="tel://+84342762999">+84 342762999</a></p>
+                    <p><span>Số điện thoại</span> <a href="tel://+84702158015">+84 702158015</a></p>
                 </div>
             </div>
             <div class="col-md-3 d-flex">
                 <div class="info bg-white p-4">
-                    <p><span>Email:</span> <a href="mailto:baotrank22tpm4@gmail.com">baotrank22tpm4@gmail.com</a></p>
+                    <p><span>Email:</span> <a href="mailto:ducthach0608@gmail.com">ducthach0608@gmail.com</a></p>
                 </div>
             </div>
             <div class="col-md-3 d-flex">
                 <div class="info bg-white p-4">
-                    <p><span>Website</span> <a href="#">https://www.fb.com/tvb58</a></p>
+                    <p><span>Website</span> <a href="#">https://www.fb.com/nducthach</a></p>
                 </div>
             </div>
         </div>
         <div class="row block-9">
             <div class="col-md-6 order-md-last d-flex">
-                <form action="#" class="bg-white p-5 contact-form">
+                <form action="#" class="bg-white p-5 contact-form" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Tên của bạn">
+                        <input type="text" class="form-control" name="fullname" placeholder="Tên của bạn">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Email của bạn">
+                        <input type="text" class="form-control" name="email" placeholder="Email của bạn">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Số điện thoại của bạn">
+                        <input type="text" class="form-control" name="phone" placeholder="Số điện thoại của bạn">
                     </div>
                     <div class="form-group">
-                        <textarea name="" id="" cols="30" rows="7" class="form-control"
+                        <textarea name="message" id="" cols="30" rows="7" class="form-control"
                                   placeholder="Lời nhắn"></textarea>
                     </div>
                     <div class="form-group">

@@ -24,6 +24,7 @@
                             <option value="0">Không Hiển Thị</option>
                         </select>
                     </div>
+
                     <button type="submit" class="btn btn-success">Xác nhận</button>
                     <button type="reset" class="btn btn-primary">Làm lại</button>
                 </form>

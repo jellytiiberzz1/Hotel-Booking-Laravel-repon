@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-        <a class="navbar-brand" href="/">NOVOTEL</a>
+        <a class="navbar-brand" href="/"><img src="https://www.freelogodesign.org/file/app/client/thumb/5481a076-624b-4ffe-a7b5-b497e79eeebf_200x200.png?1588064113680" style="width: 80px; height: 70px;" alt="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span> Menu

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Novotel | @yield('title')</title>
+    <link rel="icon" href="https://www.freelogodesign.org/file/app/client/thumb/5481a076-624b-4ffe-a7b5-b497e79eeebf_200x200.png?1588064113680" type="image/x-icon">
     <link rel="stylesheet" href="{{asset('client/css/login.css')}}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">

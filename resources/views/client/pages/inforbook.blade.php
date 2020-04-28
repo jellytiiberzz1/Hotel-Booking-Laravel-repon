@@ -121,27 +121,42 @@
                                         <div class="form-group">
                                             <input type="text" class="form-control name" placeholder="Họ và Tên"
                                                    name="name">
+                                            @if($errors->has('name'))
+                                                <div class="alert alert-danger">{{ $errors->first('name') }}</div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <input type="email" class="form-control email" placeholder="E-mail"
                                                    name="email">
+                                            @if($errors->has('email'))
+                                                <div class="alert alert-danger">{{ $errors->first('email') }}</div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control CMND" placeholder="CMND" name="CMND">
+                                            @if($errors->has('cmnd'))
+                                                <div class="alert alert-danger">{{ $errors->first('cmnd') }}</div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control address" placeholder="Địa chỉ"
                                                    name="address">
+                                            @if($errors->has('address'))
+                                                <div class="alert alert-danger">{{ $errors->first('address') }}</div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control phone" placeholder="Phone"
                                                    name="phone">
+                                            @if($errors->has('phone'))
+                                                <div class="alert alert-danger">{{ $errors->first('phone') }}</div>
+                                            @endif
                                         </div>
 
                                         <input type="hidden" value="{{ $room->id }}" name="idRoom">
                                         <input type="hidden" value="{{ rand() }}" name="code_order">
                                         <input type="hidden" value="{{ '1' }}" name="status">
-                                        <input type="hidden" value="{{($room->usd)*25/100}}" name="amount">
+                                        <input type="hidden" value="{{($room->usd)}}" name="amount">
 
                                         {{--                                            <input type="hidden" value="{{ $room->image }}" name="image">--}}
                                         {{--                                            <input type="hidden" value="{{ $room->price }}" name="price">--}}

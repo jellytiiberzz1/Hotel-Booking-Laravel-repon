@@ -60,8 +60,9 @@ class ShowController extends Controller
         return view('client.pages.room', ['room3' => $room3]);
     }
 
-    public function about()
+    public function about(Request $request)
     {
+
         return view('client.pages.about');
     }
 
