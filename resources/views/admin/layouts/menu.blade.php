@@ -2,10 +2,10 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon">
+            <img src="https://www.freelogodesign.org/file/app/client/thumb/6d0635c0-045a-4047-adc2-51c002158e69_200x200.png?1588131453608" style="height:70px;" alt="logo">
         </div>
-        <div class="sidebar-brand-text mx-3">Novotel<sup>2</sup></div>
+
     </a>
 
     <!-- Divider -->

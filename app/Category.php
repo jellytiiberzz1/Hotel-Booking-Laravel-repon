@@ -9,7 +9,7 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $fillable = [
-        'name', 'slug', 'status',
+        'name', 'slug', 'status', 'image'
     ];
 
     public function Kind_Rooms(){

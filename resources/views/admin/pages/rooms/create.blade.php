@@ -73,9 +73,6 @@
                         @endif
                     </div>
 
-
-
-
                     <button type="submit" class="btn btn-success">Thêm</button>
                     <button type="reset" class="btn btn-primary">Nhập Lại</button>
                 </form>

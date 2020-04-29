@@ -34,6 +34,7 @@ Route::get('rooms','ShowController@rooms');
 Route::get('restaurant','ShowController@restaurant');
 Route::get('about','ShowController@about');
 Route::get('contact','ShowController@contact');
+Route::post('/message','ShowController@contactPost');
 
 Route::resource('booking','BookingsController');
 Route::get('dat-phong-{id}','BookingsController@addBook')->name('addBook');

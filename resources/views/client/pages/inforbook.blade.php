@@ -134,8 +134,8 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control CMND" placeholder="CMND" name="CMND">
-                                            @if($errors->has('cmnd'))
-                                                <div class="alert alert-danger">{{ $errors->first('cmnd') }}</div>
+                                            @if($errors->has('CMND'))
+                                                <div class="alert alert-danger">{{ $errors->first('CMND') }}</div>
                                             @endif
                                         </div>
                                         <div class="form-group">

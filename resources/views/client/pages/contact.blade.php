@@ -2,7 +2,7 @@
 @section('title')Liên Hệ
 @endsection
 
-<div class="hero-wrap" style="background-image: url('{{asset('client/images/bg_1.jpg')}}');">
+<div class="hero-wrap" style="  background-image: url('{{asset('client/images/bg_1.jpg')}}');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
@@ -46,19 +46,32 @@
         </div>
         <div class="row block-9">
             <div class="col-md-6 order-md-last d-flex">
-                <form action="#" class="bg-white p-5 contact-form" method="post">
+                <form action="/message" class="bg-white p-5 contact-form" method="post">
+                    @csrf
                     <div class="form-group">
                         <input type="text" class="form-control" name="fullname" placeholder="Tên của bạn">
+                        @if($errors->has('fullname'))
+                            <div class="alert alert-danger">{{ $errors->first('fullname') }}</div>
+                        @endif
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" name="email" placeholder="Email của bạn">
+                        @if($errors->has('email'))
+                            <div class="alert alert-danger">{{ $errors->first('email') }}</div>
+                        @endif
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" name="phone" placeholder="Số điện thoại của bạn">
+                        @if($errors->has('phone'))
+                            <div class="alert alert-danger">{{ $errors->first('phone') }}</div>
+                        @endif
                     </div>
                     <div class="form-group">
                         <textarea name="message" id="" cols="30" rows="7" class="form-control"
                                   placeholder="Lời nhắn"></textarea>
+                        @if($errors->has('message'))
+                            <div class="alert alert-danger">{{ $errors->first('message') }}</div>
+                        @endif
                     </div>
                     <div class="form-group">
                         <input type="submit" value="GỬI" class="btn btn-primary py-3 px-5">

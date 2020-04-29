@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Bookings;
 use App\Category;
+use App\Contacts;
+use App\Http\Requests\ContactRequest;
 use App\Rooms;
 use App\User;
 use Illuminate\Http\Request;
@@ -38,7 +40,7 @@ class ShowController extends Controller
                     ->where('status', 1)
                     ->get();
             }
-            return view('client.pages.book', compact('room3','room2'));
+            return view('client.pages.book', compact('room3', 'room2'));
         } elseif ($request->key == null) {
 
             $room3 = Rooms::where('date_from', '<=', $request->date_to)
@@ -49,7 +51,7 @@ class ShowController extends Controller
                 ->where('date_to', '>=', $request->date_from)
                 ->where('idCategory', '=', $request->key)
                 ->get();
-        return view('client.pages.book', compact('room3','room2'));
+        return view('client.pages.book', compact('room3', 'room2'));
 
 
     }
@@ -60,7 +62,7 @@ class ShowController extends Controller
         return view('client.pages.room', ['room3' => $room3]);
     }
 
-    public function about(Request $request)
+    public function about()
     {
 
         return view('client.pages.about');
@@ -69,6 +71,37 @@ class ShowController extends Controller
     public function contact()
     {
         return view('client.pages.contact');
+    }
+
+    public function contactPost(ContactRequest $request)
+    {
+//        $this->validate($request,
+//            [
+//                'fullname' => 'required|min:2|max:150',
+//                'email' => 'required|email',
+//                'phone' => 'required|numeric',
+//                'message' => 'required|min:6',
+//            ],
+//            [
+//                'fullname.required' => 'Họ và tên không được bỏ trống',
+//                'fullname.min' => 'Họ và tên ít nhất 2 ký tự',
+//                'fullname.max' => 'Họ và tên tối đa',
+//                'email.required' => 'Email không được bỏ trống',
+//                'email.email' => 'Email không đúng định dạng',
+//                'phone.required' => 'Số điện thoại không được bỏ trống',
+//                'phone.numeric' => 'Số điện thoại phải là số',
+//                'message.required' => 'Lời nhắn không được bỏ trống',
+//                'message.min' => 'Lời nhắn ít nhất 6 ký tự',
+//            ]
+//        );
+        Contacts::create([
+            'fullname' => $request->fullname,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'message' => $request->message,
+
+        ]);
+        return redirect('/')->with('thongbao', 'Cảm ơn đã gửi phản hồi');
     }
 
     public function getDetail($slug)
