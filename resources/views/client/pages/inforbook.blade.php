@@ -1,7 +1,7 @@
 @extends('client.layout.master')
 
 
-@section('title')Chi tiết hóa đơn
+@section('title')Đặt phòng
 @endsection
 @section('content6')
 <div class="hero-wrap" style="background-image: url({{asset('client/images/bg_1.jpg')}});">
@@ -12,7 +12,7 @@
                 <div class="text">
                     <p class="breadcrumbs mb-2"><span class="mr-2"><a href="/">Trang Chủ</a></span> <span>Cart</span>
                     </p>
-                    <h1 class="mb-4 bread">Chi Tiết Hóa Đơn</h1>
+                    <h1 class="mb-4 bread">Đặt phòng</h1>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                         </a>
                     </li>
                     <li role="presentation" class="active">
-                        <a href="{{ route('addBook',['id' => $room->id]) }}">
+                        <a href="{{ route('addBook',['slug' => $cate->slug]) }}">
                   <span class="ed-step">
                     <span class="ed-step-fill"></span>
                   </span>
@@ -63,13 +63,13 @@
                                 <li>
                                     <span>Loại Phòng</span>
                                     <span>
-                          <img src="{{asset('img/upload/rooms')}}{{ '/'.$room->image }}" alt="image" class="img-fluid">
-                          {{$room->Category->name}}
+                          <img src="{{asset('img/upload/category')}}{{ '/'.$cate->image }}" alt="image" class="img-fluid">
+                          {{$cate->name}}
                         </span>
                                 </li>
                                 <li>
-                                    <span>Loại Phòng</span>
-                                    <span>{{ $room->Kind_rooms->name}}</span>
+                                    <span>Kiểu Phòng </span>
+                                    <span>Phòng đơn</span>
                                 </li>
 
                                 <li>
@@ -81,14 +81,14 @@
                             <h4 class="headline">Tổng Cộng</h4>
                             <div class="ed-total">
                       <span class="total-room">
-                        <span>{{$room->number_room}}</span>Room
+                        <span></span>Room
                       </span>
                                 <span class="total-offer">
                         <span>25%</span>off
                       </span>
                                 <div class="ed-total-price">
-                                    <span class="offer-price" style="font-size: 15px">{{ number_format($room->price)}}&nbspVNĐ</span>
-                                    <span class="total-price" style="font-size: 15px">{{ number_format($room->sale)}}&nbspVNĐ</span>
+                                    <span class="offer-price" style="font-size: 15px">{{ number_format((($cate->price)*25/100)+($cate->price))}}&nbspVNĐ</span>
+                                    <span class="total-price" style="font-size: 15px">{{ number_format($cate->price)}}&nbspVNĐ</span>
                                 </div>
                             </div>
 
@@ -153,10 +153,11 @@
                                             @endif
                                         </div>
 
-                                        <input type="hidden" value="{{ $room->id }}" name="idRoom">
+                                        <input type="hidden" value="{{ $cate->id }}" name="idCategory">
+                                        <input type="hidden" value="{{ $cate->id }}" name="idCategory">
                                         <input type="hidden" value="{{ rand() }}" name="code_order">
                                         <input type="hidden" value="{{ '1' }}" name="status">
-                                        <input type="hidden" value="{{($room->usd)}}" name="amount">
+                                        <input type="hidden" value="{{($cate->usd)}}" name="amount">
 
                                         {{--                                            <input type="hidden" value="{{ $room->image }}" name="image">--}}
                                         {{--                                            <input type="hidden" value="{{ $room->price }}" name="price">--}}

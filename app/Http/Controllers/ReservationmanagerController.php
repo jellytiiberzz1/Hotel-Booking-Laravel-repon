@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bookings;
+use App\Contacts;
 use Illuminate\Http\Request;
 use Mail;
 use App\Mail\BookingHotelMail;
@@ -17,8 +18,9 @@ class ReservationmanagerController extends Controller
      */
     public function index()
     {
-        $booking = Bookings::where('status',1)->paginate(5);
-        return view('admin.pages.Booking.booking', compact('booking'));
+        $booking = Bookings::where('status',1)->paginate(10);
+        $contact = Contacts::all();
+        return view('admin.pages.Booking.booking', compact('booking','contact'));
     }
 
     /**

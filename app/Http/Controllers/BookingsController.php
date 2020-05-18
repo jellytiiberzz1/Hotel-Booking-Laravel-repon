@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Bill;
+
 use App\Bookings;
+use App\Category;
 use App\Customer;
 use App\Http\Requests\BookingRequest;
-use App\Kind_Rooms;
-use App\Mail\BookingHotelMail;
-use App\Rooms;
-use App\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+
 
 class BookingsController extends Controller
 {
@@ -24,10 +20,10 @@ class BookingsController extends Controller
      */
     public function index(Request $request)
     {
-        $value = $request->session()->get('id');
-        $room = Rooms::where('id',$value)->first();
-        $booking = Bookings::where('idRoom',$value)->first();
-        return view('client.pages.confirmation', compact('room', 'booking'));
+        $value = $request->session()->get('slug');
+        $cate = Category::where('slug',$value)->first();
+        $booking = Bookings::where('idCategory',$cate->id)->first();
+        return view('client.pages.confirmation', compact('cate', 'booking'));
     }
 
     /**
@@ -46,11 +42,11 @@ class BookingsController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BookingRequest $request)
+    public function store(BookingRequest $request )
     {
         $data = $request->except('_token');
         Bookings::create($data);
-        $customer = $request->except(['_token', 'idRoom', 'amount','code_order', 'date_from', 'date_to', 'additional_information']);
+        $customer = $request->except(['_token', 'idCategory', 'amount','code_order', 'date_from', 'date_to', 'additional_information']);
         Customer::create($customer);
 //        Mail::to($booking->email)->send(new BookingHotelMail($booking));
 
@@ -109,11 +105,11 @@ class BookingsController extends Controller
 
     }
 
-    public function addBook(Request $request, $id)
+    public function addBook(Request $request,$slug)
     {
-        $room = Rooms::where('id', $id)->first();
-        $request->session()->put('id', $id);
-        return view('client.pages.inforbook', compact('room'));
+        $cate = Category::where('slug', $slug)->first();
+        $request->session()->put('slug', $slug);
+        return view('client.pages.inforbook', compact('cate'));
 
     }
 }

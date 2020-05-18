@@ -3,7 +3,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
         <div class="sidebar-brand-icon">
-            <img src="https://www.freelogodesign.org/file/app/client/thumb/6d0635c0-045a-4047-adc2-51c002158e69_200x200.png?1588131453608" style="height:70px;" alt="logo">
+            <img src="https://www.freelogodesign.org/file/app/client/thumb/74c59f4e-ccef-4118-a250-8086ebcd74d6_200x200.png?1589823320764" style="height:70px;" alt="logo">
         </div>
 
     </a>
@@ -72,6 +72,7 @@
             </div>
         </div>
     </li>
+
     <hr class="sidebar-divider">
     <div class="sidebar-heading">
         Danh mục phòng
@@ -143,14 +144,15 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#member"
            aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Quản lý member</span>
+            <span>Quản lý người dùng</span>
         </a>
         <div id="member" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Danh mục member</h6>
+                <h6 class="collapse-header">Danh mục nhân viên</h6>
                 <a class="collapse-item" href="{{route('member.index')}}">Danh sách</a>
                 {{--                <a class="collapse-item" href="{{route('serviceslug.create')}}">Thêm mới</a>--}}
-
+                <h6 class="collapse-header">Danh mục khách hàng</h6>
+                <a class="collapse-item" href="{{route('customer.index')}}">Danh sách</a>
             </div>
         </div>
     </li>

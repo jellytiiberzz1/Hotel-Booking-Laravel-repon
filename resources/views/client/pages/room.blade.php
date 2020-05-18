@@ -28,12 +28,12 @@
             </div>
                 <div class="container">
                     <div class="row">
-                        @foreach($room3 as $value => $key)
+                        @foreach($room as $value => $key)
                         <div class="col-md-6 col-lg-4 mb-5">
                             <div class="hotel-room text-center">
-                                <a href="chi-tiet-phong-{{$key->slug}}" class="d-block mb-0 thumbnail"><img src="{{asset('img/upload/rooms')}}{{ '/'.$key->image }}" alt="Image" class="img-fluid"></a>
+                                <a href="chi-tiet-{{$key->slug}}" class="d-block mb-0 thumbnail"><img src="{{asset('img/upload/category')}}{{ '/'.$key->image }}" alt="Image" class="img-fluid"></a>
                                 <div class="hotel-room-body">
-                                    <h3 class="heading mb-0"><a href="chi-tiet-phong-{{$key->slug}}">{{$key->Category->name}}</a></h3>
+                                    <h3 class="heading mb-0"><a href="chi-tiet-{{$key->slug}}">{{$key->name}}</a></h3>
                                     <span class="price" style="font-size: 32px">{{number_format($key->price)}}<span>&nbspVNĐ</span></span>
                                 </div>
                             </div>

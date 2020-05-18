@@ -12,14 +12,14 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead >
+                    <thead>
                     <tr>
                         <th scope="col">STT</th>
                         <th scope="col">Tên phòng</th>
-                        <th scope="col">Thông tin</th>
-                        <th scope="col">Hình ảnh</th>
+                        <th scope="col">Thông tin khách hàng</th>
                         <th scope="col">Giới thiệu</th>
-                        <th scope="col">Ngày cập nhật</th>
+                        <th scope="col">Ngày vào/Ngày ra</th>
+                        <th scope="col">Tình trạng</th>
                         <th scope="col">Chỉnh sửa</th>
                     </tr>
                     </thead>
@@ -27,10 +27,10 @@
                     <tr>
                         <th scope="col">STT</th>
                         <th scope="col">Tên phòng</th>
-                        <th scope="col">Thông tin</th>
-                        <th scope="col">Hình ảnh</th>
+                        <th scope="col">Thông tin khách hàng</th>
                         <th scope="col">Giới thiệu</th>
-                        <th scope="col">Ngày cập nhật</th>
+                        <th scope="col">Ngày vào/Ngày ra</th>
+                        <th scope="col">Tình trạng</th>
                         <th scope="col">Chỉnh sửa</th>
                     </tr>
                     </tfoot>
@@ -39,23 +39,29 @@
                         <tr>
                             <th scope="row">{{$key+=1}}</th>
                             <td>{{$value->number_room}}</td>
-
+                            <td><b>Tên KH:</b>{{$value->name}}<br/>
+                                <b>Địa chỉ:</b>{{$value->address}}<br/>
+                                <b>ID công dân:</b>{{$value->CMND}}<br/>
+                               <b>SĐT:</b> {{$value->phone}}<br/>
+                            </td>
                             <td>
-                                <b>Mệnh giá phòng:</b>{{ number_format($value->price,2) }}<span>&nbspVNĐ</span>
+                                <b>Kiểu phòng: </b>{{$value->Kind_rooms->name}}
                                 <br/>
-                                <b>Giá khuyến mãi:</b>{{ number_format($value->sale,2)}}<span>&nbspVNĐ</span>
-                                <br/>
-                                <b>Kiểu phòng</b>{{$value->Kind_rooms->name}}
-                                <br/>
-                                <b>Loại phòng:</b>{{$value->Category->name}}
+                                <b>Loại phòng: </b>{{$value->Category->name}}
                                 <br/>
                             </td>
-                            <td><img src="{{asset('img/upload/rooms')}}{{ '/'.$value->image }}" width="100"
-                                     height="100">
+                            <td>{{date('d-m-Y', strtotime($value->date_from))}}<br/>
+                                {{date('d-m-Y', strtotime($value->date_to))}}<br/>
                             </td>
-                            <td>{!! $value->description !!}</td>
-
-                            <td>{{$value->updated_at}}</td>
+                            <td>
+                                @if($value->status == 1)
+                                    {{ "Phòng trống" }}
+                                @elseif($value->status == 2)
+                                    {{ "Phòng đã đặt" }}
+                                @else
+                                    {{"Đang sử dụng"}}
+                                @endif
+                            </td>
                             <td>
 
                                 <button class="btn btn-primary editRooms" title="{{ "Sửa ".$value->number_room }}"
@@ -89,35 +95,42 @@
                         <div class="col-lg-12">
                             <form role="form" id="updateRoom" method="post" enctype="multipart/form-data">
                                 <fieldset class="form-group">
-                                    <label>Tên sản phẩm</label>
+                                    <label>Tên số phòng</label>
                                     <input class="form-control number_room" name="number_room"
-                                           placeholder="Nhập tên loại sản phẩm">
+                                           placeholder="Nhập số phòng">
                                     <div class="alert alert-danger errorNumber_room"></div>
                                 </fieldset>
                                 <div class="form-group">
+                                    <label>Họ&Tên khách hàng</label>
+                                    <input type="text" class="form-control name" placeholder="Họ và Tên"
+                                           name="name">
+                                    <div class="alert alert-danger errorName"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Địa chỉ</label>
+                                    <input type="text" class="form-control address" placeholder="Địa chỉ"
+                                           name="address">
+                                    <div class="alert alert-danger errorAddress"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Chứng minh thư</label>
+                                    <input type="text" class="form-control CMND" placeholder="Chứng minh thư"
+                                           name="CMND">
+                                    <div class="alert alert-danger errorCMND"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Số điện thoại</label>
+                                    <input type="text" class="form-control phone" placeholder="phone"
+                                           name="phone">
+                                    <div class="alert alert-danger errorPhone"></div>
+                                </div>
+                                <div class="form-group">
                                     <label>Tình trạng</label>
                                     <select class="form-control status" name="status">
-                                        <option value="1" class="ht">Trống</option>
-                                        <option value="0" class="kht">Đang sửa dụng</option>
+                                        <option value="1" class="t">Trống</option>
+                                        <option value="2" class="dt">Đặt trước</option>
+                                        <option value="0" class="sd">Đang sửa dụng</option>
                                     </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Mô tả</label>
-                                    <textarea class="form-control description" id="demo" name="description" cols="5"
-                                              rows="5" placeholder="Mô tả phòng"></textarea>
-                                    <div class="alert alert-danger errorDescription"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="price">Đơn giá</label>
-                                    <input type="text" name="price" placeholder="Nhập đơn giá"
-                                           class="form-control price">
-                                    <div class="alert alert-danger errorPrice"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="price">Giá khuyến mại</label>
-                                    <input type="text" name="sale" value="0" placeholder="Nhập giá khuyến mại nếu có"
-                                           class="form-control sale">
-                                    <div class="alert alert-danger errorSale"></div>
                                 </div>
                                 <div class="form-group">
                                     <label>Loại phòng</label>
@@ -127,20 +140,19 @@
                                     <label>Kiểu phòng</label>
                                     <select class="form-control roomkindRooms" name="idKindRooms"></select>
                                 </div>
-                                <img class="img img-thumbnail imageThum" width="100" height="100" lign="center">
                                 <div class="form-group">
-                                    <label for="price">Ảnh minh họa</label>
-                                    <input type="file" name="image" class="form-control image">
-                                    <div class="alert alert-danger errorImage"></div>
+                                    <label>Ngày vào</label>
+                                    <input class="form-control date_from" type="date" name="date_from">
+                                    <div class="alert alert-danger errorDate_from"></div>
                                 </div>
                                 <div class="form-group">
                                     <label>Ngày vào</label>
-                                    <input class="form-control created_at" type="date" name="created_at">
-                                    <div class="alert alert-danger errorCreated_at"></div>
+                                    <input class="form-control date_to" type="date" name="date_to">
+                                    <div class="alert alert-danger errorDate_to"></div>
                                 </div>
                                 <input type="submit" class="btn btn-success" value="Sửa">
-{{--                                <button type="reset" class="btn btn-primary">Nhập Lại</button>--}}
-{{--                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>--}}
+                                <button type="reset" class="btn btn-primary">Nhập Lại</button>
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                             </form>
                         </div>
                     </div>

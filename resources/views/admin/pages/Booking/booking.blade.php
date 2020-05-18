@@ -21,6 +21,7 @@
                         <th scope="col">Ngày vào/Ngày Ra</th>
                         <th scope="col">Số tiền đặt</th>
                         <th scope="col">Tình trạng</th>
+                        <th scope="col">Chỉnh sửa</th>
                     </tr>
                     </thead>
                     <tfoot>
@@ -32,6 +33,7 @@
                         <th scope="col">Ngày vào/Ngày Ra</th>
                         <th scope="col">Số tiền đặt</th>
                         <th scope="col">Tình trạng</th>
+                        <th scope="col">Chỉnh sửa</th>
                     </tr>
                     </tfoot>
                     <tbody>
@@ -40,7 +42,7 @@
                             <td>{{ $key+1 }}</td>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->code_order }}</td>
-                            <td>{{ $value->rooms->number_room }}</td>
+                            <td>{{ $value->Category->name }}</td>
                             <td>{{$value->date_from}}
                                 <span>/</span>{{$value->date_from}}
                             </td>

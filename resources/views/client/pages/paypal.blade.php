@@ -24,7 +24,7 @@
             <div class="tab-control">
                 <ul class="nav nav-tabs ">
                     <li role="presentation" class="ed-done">
-                        <a href="booking-step1.html">
+                        <a href="/find">
                   <span class="ed-step">
                     <span class="ed-step-fill"></span>
                   </span>
@@ -33,7 +33,7 @@
                         </a>
                     </li>
                     <li role="presentation" class="ed-done">
-                        <a href="booking-step2.html">
+                        <a href="{{ route('addBook',['slug' => $cate->slug]) }}">
                   <span class="ed-step">
                     <span class="ed-step-fill"></span>
                   </span>
@@ -41,7 +41,7 @@
                         </a>
                     </li>
                     <li role="presentation" class="active">
-                        <a href="booking-step3.html">
+                        <a href="">
                   <span class="ed-step">
                     <span class="ed-step-fill"></span>
                   </span>
@@ -63,13 +63,13 @@
                                 <li>
                                     <span>Loại Phòng</span>
                                     <span>
-                          <img src="{{asset('img/upload/rooms')}}{{ '/'.$room->image }}" alt="image" class="img-fluid">
-                          {{$room->Category->name}}
+                          <img src="{{asset('img/upload/category')}}{{ '/'.$cate->image }}" alt="image" class="img-fluid">
+                          {{$cate->name}}
                         </span>
                                 </li>
                                 <li>
-                                    <span>Loại Phòng</span>
-                                    <span>{{ $room->Kind_rooms->name}}</span>
+                                    <span>Kiểu Phòng</span>
+                                    <span>Phòng đơn</span>
                                 </li>
 
                                 <li>
@@ -81,14 +81,14 @@
                             <h4 class="headline">Tổng Cộng</h4>
                             <div class="ed-total">
                       <span class="total-room">
-                        <span>{{$room->number_room}}</span>Room
+                        <span></span>Room
                       </span>
                                 <span class="total-offer">
                         <span>25%</span>off
                       </span>
                                 <div class="ed-total-price">
-                                    <span class="offer-price" style="font-size: 15px">{{ number_format($room->price)}}&nbspVNĐ</span>
-                                    <span class="total-price" style="font-size: 15px">{{ number_format($room->sale)}}&nbspVNĐ</span>
+                                    <span class="offer-price" style="font-size: 15px">{{ number_format((($cate->price)*25/100)+($cate->price))}}&nbspVNĐ</span>
+                                    <span class="total-price" style="font-size: 15px">{{ number_format($cate->price)}}&nbspVNĐ</span>
                                 </div>
                             </div>
 
@@ -120,12 +120,12 @@
                                     <div class="form-group ">
                                         <label for="form-group" class="col-sm-4">Số tiền trả trước (USD): </label>
                                         <input id="amount" type="text" name="amount" class="form-control"
-                                               value="{{($room->usd)*25/100}}" readonly>
+                                               value="{{($cate->usd)}}" readonly>
                                     </div>
                                     <div class="form-group ">
                                     <label for="inputname" class="col-sm-4 col-form-label">Novotel (Phòng đặt): </label>
                                         <input id="item" type="text" name="item" class="form-control"
-                                               value=" {{$room->number_room}}" readonly>
+                                               value=" {{$cate->name}}" readonly>
                                     </div>
 
                                 </div>

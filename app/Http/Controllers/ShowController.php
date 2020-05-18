@@ -10,14 +10,15 @@ use App\Rooms;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ShowController extends Controller
 {
     public function index()
     {
-        $room3 = Rooms::where('status', 1)->get();
-        $room2 = Category::where('status', 1)->get();
-        return view('client.pages.index', ['room3' => $room3], ['room2' => $room2]);
+        $cate = Category::where('status', 1)->get();
+        return view('client.pages.index', ['cate' => $cate]);
+
 
     }
 //    public function room()
@@ -32,7 +33,6 @@ class ShowController extends Controller
 
     public function findrooms(Request $request)
     {
-        $room2 = Category::where('status', 1)->get();
         if ($request->date_from == '' || $request->date_to == '') {
             $room3 = Rooms::where('status', 1)->get();
             if ($request->key != null) {
@@ -40,26 +40,24 @@ class ShowController extends Controller
                     ->where('status', 1)
                     ->get();
             }
-            return view('client.pages.book', compact('room3', 'room2'));
         } elseif ($request->key == null) {
-
-            $room3 = Rooms::where('date_from', '<=', $request->date_to)
-                ->where('date_to', '>=', $request->date_from)
+            $room3 = Rooms::WhereNotIn('date_from', [$request->date_from])
+                ->whereNotIn('date_to', [$request->date_to])
                 ->get();
-        } else
-            $room3 = Rooms::where('date_from', '<=', $request->date_to)
-                ->where('date_to', '>=', $request->date_from)
+        } else {
+            $room3 = Rooms::WhereNotIn('date_from', [$request->date_from])
+                ->whereNotIn('date_to', [$request->date_to])
                 ->where('idCategory', '=', $request->key)
                 ->get();
-        return view('client.pages.book', compact('room3', 'room2'));
+        }
 
-
+        return view('client.pages.book', compact('room3'));
     }
 
     public function rooms()
     {
-        $room3 = Rooms::where('status', 1)->get();
-        return view('client.pages.room', ['room3' => $room3]);
+        $cate = Category::where('status', 1)->get();
+        return view('client.pages.room', ['room' => $cate]);
     }
 
     public function about()
@@ -75,25 +73,7 @@ class ShowController extends Controller
 
     public function contactPost(ContactRequest $request)
     {
-//        $this->validate($request,
-//            [
-//                'fullname' => 'required|min:2|max:150',
-//                'email' => 'required|email',
-//                'phone' => 'required|numeric',
-//                'message' => 'required|min:6',
-//            ],
-//            [
-//                'fullname.required' => 'Họ và tên không được bỏ trống',
-//                'fullname.min' => 'Họ và tên ít nhất 2 ký tự',
-//                'fullname.max' => 'Họ và tên tối đa',
-//                'email.required' => 'Email không được bỏ trống',
-//                'email.email' => 'Email không đúng định dạng',
-//                'phone.required' => 'Số điện thoại không được bỏ trống',
-//                'phone.numeric' => 'Số điện thoại phải là số',
-//                'message.required' => 'Lời nhắn không được bỏ trống',
-//                'message.min' => 'Lời nhắn ít nhất 6 ký tự',
-//            ]
-//        );
+//
         Contacts::create([
             'fullname' => $request->fullname,
             'email' => $request->email,
@@ -106,14 +86,15 @@ class ShowController extends Controller
 
     public function getDetail($slug)
     {
-        $room = Rooms::where('slug', $slug)->where('status', 1)->first();
-        return view('client.pages.roomsingle', ['room3' => $room]);
+        $cate = Category::where('slug', $slug)->where('status', 1)->first();
+        return view('client.pages.roomsingle', ['cate' => $cate]);
     }
 
     public function infor()
     {
         if (Auth::check()) {
             return view('client.pages.information');
+
         } else {
             return redirect()->to('/');
         }

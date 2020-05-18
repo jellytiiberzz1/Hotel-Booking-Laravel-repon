@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Bookings;
+use App\Contacts;
 use App\Customer;
 use App\Http\Requests\CustomerRequest;
+use App\User;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -16,7 +19,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customer = Customer::where('status',1)->paginate(10);
+        $contact = Contacts::all();
+        $booking = Bookings::where('status', 1)->get();
+        return view('admin.pages.user.customer', compact('customer','contact','booking'));
     }
 
     /**

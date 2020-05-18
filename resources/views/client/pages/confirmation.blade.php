@@ -23,8 +23,8 @@
         <div class="border payment-confirm position-relative">
             <div class="row justify-content-center align-items-center ">
                 <div class="col-md-12 col-sm-12 col-12 col-lg-4 mb-4 mb-lg-0">
-                    <img src="{{asset('img/upload/rooms')}}{{ '/'.$room->image }}" class="img-fluid w-100" alt="confirm img"/>
-                    <a href="#"><h2 class="text-uppercase text-dark mt-3 mb-4">{{ $room->Kind_rooms->name}}</h2></a>
+                    <img src="{{asset('img/upload/category')}}{{ '/'.$cate->image }}" class="img-fluid w-100" alt="confirm img"/>
+                    <a href="#"><h2 class="text-uppercase text-dark mt-3 mb-4">Phòng đơn</h2></a>
                     <h4 class="headline">Cảm ơn quý khách đã sử dụng dịch vụ của khách sạn chúng tôi - khách sạh Novotel.</h4>
                 </div>
 
@@ -43,7 +43,7 @@
                                         {{$booking->date_to}}
                                     </li>
                                     <li>
-                                        <span>Adults:  </span>
+                                        <span>Adults:</span>
                                         2
                                     </li>
                                     <li>

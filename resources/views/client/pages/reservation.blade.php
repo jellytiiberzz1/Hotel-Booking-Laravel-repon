@@ -24,7 +24,7 @@
                 <th scope="row">{{$key+=1}}</th>
                 <td>{{$value->name}}</td>
                 <td>{{$value->code_order}}</td>
-                <td>{{$value->rooms->number_room}}</td>
+                <td>{{$value->Category->name}}</td>
                 <td>{{$value->date_from}}
                 <span>/</span>{{$value->date_from}}
                 </td>

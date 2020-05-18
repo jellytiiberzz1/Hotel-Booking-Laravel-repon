@@ -1,6 +1,6 @@
 @extends('client.layout.master')
 
-@section('title')Chi tiết phòng{{ $room3->Category->name }}
+@section('title')Chi tiết {{$cate->name}}
 @endsection
 @section('content6')
 <div class="hero-wrap" style="background-image: url('{{asset('client/images/bg_1.jpg')}}');">
@@ -26,7 +26,7 @@
                     <div class="col-md-12 ftco-animate">
                         <div class="single-slider owl-carousel">
                             <div class="item">
-                                <div class="room-img" style="background-image: url({{asset('img/upload/rooms/'.$room3->image)}});"></div>
+                                <div class="room-img" style="background-image: url({{asset('img/upload/category/'.$cate->image)}});"></div>
                             </div>
                             <div class="item">
                                 <div class="room-img" style="background-image: url({{asset('client/images/room-5.jpg')}});"></div>
@@ -38,15 +38,15 @@
                     </div>
 
                     <div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
-                        <h2 class="mb-4">{{$room3->Category->name}}</h2>
+                        <h2 class="mb-4">{{$cate->name}}</h2>
                         <p>Căn phòng chứa đựng những điều tốt đẹp nhất...</p>
                         <div class="d-md-flex mt-5 mb-5">
                             <ul class="list">
-                                <li><span>Giá phòng : </span> <b>{{number_format($room3->price)}}<span>&nbspVNĐ</span></b>
+                                <li><span>Giá phòng : </span> <b>{{number_format($cate->price)}}<span>&nbspVNĐ</span></b>
                                 </li>
                             </ul>
                             <ul class="list ml-md-5">
-                                <li><span>Mô tả :</span>{!! $room3->description !!}</li>
+                                <li>{!! $cate->description !!}</li>
 
                             </ul>
                         </div>
@@ -117,7 +117,7 @@
             <div class="col-lg-4 sidebar ftco-animate fadeInUp ">
                 <div class="sidebar-box ftco-animate">
                     @if(Auth::check())
-                        <a  href="{{ route('addBook',['id' => $room3->id]) }}" style="color: white;background-color: red;padding: 20px 30px;">
+                        <a  href="{{ route('addBook',['id' => $cate->slug]) }}" style="color: white;background-color: red;padding: 20px 30px;">
                             Đặt Phòng
                         </a>
                     @else

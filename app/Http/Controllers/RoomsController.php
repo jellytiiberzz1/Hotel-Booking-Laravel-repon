@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Bookings;
+use App\Contacts;
 use App\Http\Requests\StoreRoomsRequest;
 use App\Rooms;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Kind_Rooms;
@@ -20,8 +23,10 @@ class RoomsController extends Controller
      */
     public function index()
     {
-        $rooms = Rooms::paginate(5);
-        return view('admin.pages.rooms.list', compact('rooms'));
+        $rooms = Rooms::paginate(10);
+        $contact = Contacts::all();
+        $booking = Bookings::where('status', 1)->get();
+        return view('admin.pages.rooms.list', compact('rooms', 'contact', 'booking'));
     }
 
     /**
@@ -33,7 +38,9 @@ class RoomsController extends Controller
     {
         $category = Category::where('status', 1)->get();
         $kindrooms = Kind_Rooms::where('status', 1)->get();
-        return view('admin.pages.rooms.create', compact('category', 'kindrooms'));
+        $contact = Contacts::all();
+        $booking = Bookings::where('status', 1)->get();
+        return view('admin.pages.rooms.create', compact('category', 'kindrooms', 'contact', 'booking'));
     }
 
     /**
@@ -44,33 +51,11 @@ class RoomsController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile('image')) {
-            $file = $request->image;
-            //Lấy tên file
-            $file_name = $file->getClientOriginalName();
-            //Lấy loại file
-            $file_type = $file->getMimeType();
-            //Kích thước file với đơn vị byte
-            $file_size = $file->getSize();
-            if($file_type == 'image/png' || $file_type == 'image/jpg' || $file_type == 'image/jpeg' || $file_type == 'image/gif'){
-                if ($file_size <= 2048576) {
-                    $file_name = date('D-m-yyyy') . '-' . rand() . '-' . utf8tourl($file_name);
-                    if ($file->move('img/upload/rooms', $file_name)) {
-                        $data = $request->all();
-                        $data['slug'] = utf8tourl($request->number_room);
-                        $data['image'] = $file_name;
-                        Rooms::create($data);
-                        return redirect()->route('rooms.index')->with('thongbao', 'Đã thêm thành công sản phẩm mới');
-                    }
-                } else {
-                    return back()->with('error', 'Bạn không thể upload ảnh quá 1mb');
-                }
-            } else {
-                return back()->with('error', 'File bạn chọn không là hình ảnh');
-            }
-        } else {
-            return back()->with('error', 'Bạn chưa thêm ảnh minh họa cho sản phẩm');
-        }
+        $data = $request->all();
+        $data['slug'] = utf8tourl($request->number_room);
+        Rooms::create($data);
+        return redirect()->route('rooms.index')->with('thongbao', 'Đã thêm thành công sản phẩm mới');
+
     }
 
     /**
@@ -107,63 +92,12 @@ class RoomsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(),
-            [
-                'number_room' => 'required|min:2|max:255',
-                'image' => 'image',
-                'description' => 'required|min:10',
-                'price' => 'required|numeric',
-                'sale' => 'numeric',
-                'created_at' => 'required|date|after:tomorrow',
-            ],
-            [
-                'required' => ':attribute không được bỏ trống',
-                'min' => ':attribute tối thiểu có 2 ký tự',
-                'max' => ':attribute tối đa có 255 ký tự',
-                'numeric' => ':attribute phải là một số ',
-                'image' => ':attribute không là hình ảnh',
-                'after' => ':attribute vào phải lớn hơn hoặc bằng ngày hiện tại',
-            ],
-            [
-                'number_room' => 'Tên phòng',
-                'description' => 'Mô tả phòng',
-                'price' => 'Đơn giá phòng',
-                'sale' => 'Giá khuyến mại',
-                'image' => 'Ảnh minh họa',
-                'created_at' => 'ngày vào',
-            ]
-        );
-        if ($validator->fails()) {
-            return response()->json(['error' => 'true', 'message' => $validator->errors()], 200);
-        }
         $rooms = Rooms::find($id);
         $data = $request->all();
-        if ($request->hasFile('image')) {
-            $file = $request->image;
-            //Lấy tên file
-            $file_name = $file->getClientOriginalName();
-            //Lấy loại file
-            $file_type = $file->getMimeType();
-            //Kích thước file với đơn vị byte
-            $file_size = $file->getSize();
-            if ($file_type == 'image/png' || $file_type == 'image/jpg' || $file_type == 'image/jpeg' || $file_type == 'image/gif') {
-                if ($file_size <= 2048576) {
-                    $file_name = date('d-mm-YYYY') . '-' . rand() . '-' . utf8tourl($file_name);
-                    if ($file->move('img/upload/rooms', $file_name)) {
-                        $data['image'] = $file_name;
-                        if (File::exists('img/upload/rooms' . $rooms->image)) {
-                            //Xóa file
-                            unlink('img/upload/rooms' . $rooms->image);
-                        }
-                    }
-                } else {
-                    return response()->json(['error', 'Dung lượng file quá lớn'], 200);
-                }
-            } else {
-                return response()->json(['error', 'File bạn chọn không phải hình ảnh'], 200);
-            }
-        } else {
-            $data['image'] = $rooms->image;
+        $data['slug'] = utf8tourl($request->name);
+         if ($request->date_from == null){
+            $data['date_from'] = Carbon::today()->toDateString();
+            $data['date_to'] = Carbon::today()->toDateString();
         }
         $rooms->update($data);
         return response()->json(['result' => 'Đã sửa thành công phòng có id là ' . $id], 200);
@@ -179,9 +113,6 @@ class RoomsController extends Controller
     {
 
         $rooms = Rooms::find($id);
-        if (File::exists('img/upload/rooms/' . $rooms->image)) {
-            unlink('img/upload/rooms/' . $rooms->image);
-        }
         $rooms->delete();
         return response()->json(['result' => 'Đã xóa thành công phòng có id là ' . $id], 200);
     }

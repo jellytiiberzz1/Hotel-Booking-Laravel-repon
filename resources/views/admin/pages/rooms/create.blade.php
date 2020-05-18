@@ -23,31 +23,10 @@
                     <div class="form-group">
                         <label>Status</label>
                         <select class="form-control" name="status">
-                            <option value="1">Hiển Thị</option>
-                            <option value="0">Không Hiển Thị</option>
+                            <option value="1">Phòng trống</option>
+                            <option value="2">Phòng đặt trước</option>
+                            <option value="0">Phòng đang sử dụng</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Mô tả phòng</label>
-                        <textarea name="description" id="demo" cols="5" rows="5" class="form-control"></textarea>
-                        @if($errors->has('description'))
-                            <div class="alert alert-danger">{{ $errors->first('description') }}</div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Mệnh giá</label>
-                        <input type="text" name="price" placeholder="Nhập mệnh giá" class="form-control">
-                        @if($errors->has('price'))
-                            <div class="alert alert-danger">{{ $errors->first('price') }}</div>
-                        @endif
-                    </div>
-                    <input type="hidden" name="usd" value="0" class="form-control">
-                    <div class="form-group">
-                        <label for="price">Giá khuyến mại</label>
-                        <input type="text" name="sale" value="0" placeholder="Nhập giá khuyến mại nếu có" class="form-control">
-                        @if($errors->has('sale'))
-                            <div class="alert alert-danger">{{ $errors->first('sale') }}</div>
-                        @endif
                     </div>
                     <div class="form-group">
                         <label>Loại phòng</label>
@@ -65,14 +44,6 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="price">Ảnh minh họa</label>
-                        <input type="file" name="image" class="form-control">
-                        @if($errors->has('image'))
-                            <div class="alert alert-danger">{{ $errors->first('image') }}</div>
-                        @endif
-                    </div>
-
                     <button type="submit" class="btn btn-success">Thêm</button>
                     <button type="reset" class="btn btn-primary">Nhập Lại</button>
                 </form>

@@ -9,7 +9,7 @@ class Rooms extends Model
     protected $table = 'rooms';
 
     protected $fillable = [
-        'number_room', 'slug','status', 'image', 'description', 'price', 'usd', 'sale', 'date_form', 'date_to', 'idCategory', 'idKindRooms',
+        'number_room', 'slug','status', 'name', 'address', 'CMND', 'phone', 'date_from', 'date_to', 'idCategory', 'idKindRooms',
         'created_at','updated_at',
 
     ];
@@ -19,7 +19,5 @@ class Rooms extends Model
     public function Kind_Rooms(){
         return $this->belongsTo('App\Kind_Rooms','idKindRooms','id');
     }
-    public function Booking(){
-        return $this->hasMany('App\Booking','idRoom','id');
-    }
+
 }

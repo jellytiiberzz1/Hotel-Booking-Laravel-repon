@@ -27,8 +27,8 @@
                     <h2 class="ftco-heading-2">Bảo Mật</h2>
                     <ul class="list-unstyled">
 
-                        <li><a href="#" class="py-2 d-block">Về Chúng Tôi</a></li>
-                        <li><a href="#" class="py-2 d-block">Liên Hệ Với Chúng Tôi</a></li>
+                        <li><a href="about" class="py-2 d-block">Về Chúng Tôi</a></li>
+                        <li><a href="contact" class="py-2 d-block">Liên Hệ Với Chúng Tôi</a></li>
                         <li><a href="#" class="py-2 d-block">Dịch Vụ</a></li>
                     </ul>
                 </div>
@@ -40,9 +40,9 @@
                         <ul>
                             <li><span class="icon icon-map-marker"></span><span class="text">Duy Tan UNIVERSITY</span>
                             </li>
-                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+84 342762999</span></a>
+                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+84 702158015</span></a>
                             </li>
-                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text"> baotrank22tpm4@gmail.com</span></a>
+                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ducthach0608@gmail.com</span></a>
                             </li>
                         </ul>
                     </div>

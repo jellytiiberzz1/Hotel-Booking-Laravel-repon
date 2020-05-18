@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Bookings;
+use App\Contacts;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -14,8 +16,10 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $member = User::paginate(5);
-        return view('admin.pages.user.member', compact('member'));
+        $member = User::where('role','=',2)->paginate(10);
+        $contact = Contacts::all();
+        $booking = Bookings::where('status', 1)->get();
+        return view('admin.pages.user.member', compact('member','contact','booking'));
     }
 
     /**

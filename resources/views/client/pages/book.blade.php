@@ -49,9 +49,11 @@
                                                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                                 <select name="key" id="" class="form-control">
                                                     <option value="">Chọn loại phòng</option>
-                                                    @foreach($room2 as $value)
-                                                        <option value="{{$value->id}}">{{$value->name}}</option>
-                                                    @endforeach
+                                                    <option value="1">Phòng Thường I</option>
+                                                    <option value="2">Phòng Thường II</option>
+                                                    <option value="3">Phòng Cao Cấp</option>
+                                                    <option value="4">Phòng V.I.P</option>
+                                                    <option value="5">Phòng Family</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -111,26 +113,20 @@
             <tr>
                 <th scope="row">{{$key+=1}}</th>
                 <td>{{$value->Category->name}}</td>
-                <td><img src="{{asset('img/upload/rooms')}}{{ '/'.$value->image }}"
+                <td><img src="{{asset('img/upload/category')}}{{ '/'.$value->Category->image }}"
                     ></td>
                 <td>{{$value->Kind_rooms->name}}</td>
-                <td>{!! $value->description !!}</td>
-                <td> @if($value->sale==0)
-                        <strike style="color: #333333">{{number_format($value->sale)}}</strike><br>
+                <td>{!! $value->Category->description !!}</td>
+                <td>
+                        <strike style="color: #333333">{{number_format((($value->Category->price)*25/100)+($value->Category->price))}}</strike><br>
                         <span
-                            class="">{{number_format($value->price)}}<span>&nbspVNĐ</span></span>
-                    @else
-                        <strike
-                            style="color: #333333">@if($value->sale==0)@else {{number_format($value->price)}}@endif</strike>
-                        <br>
-                        <span class="">{{number_format($value->sale)}}<span>&nbspVNĐ</span></span>
+                            class="">{{number_format($value->Category->price)}}<span>&nbspVNĐ</span></span>
                 </td>
-                @endif
 
                 <th>
                     <center>
                         <a style="margin: auto;border: 1px solid white;" class="btn btn-success"
-                           href="chi-tiet-phong-{{$value->slug}}">Đặt Phòng</a>
+                           href="chi-tiet-{{$value->Category->slug}}">Chi tiết phòng</a>
                     </center>
                 </th>
             </tr>

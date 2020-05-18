@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Bookings;
 use App\Category;
+use App\Contacts;
 use App\Kind_Rooms;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreKindRoomsRequest;
@@ -17,8 +19,10 @@ class KindRoomsController extends Controller
      */
     public function index()
     {
-        $kindrooms = Kind_Rooms::paginate(5);
-        return view('admin.pages.kindrooms.list', compact('kindrooms'));
+        $kindrooms = Kind_Rooms::paginate(10);
+        $contact = Contacts::all();
+        $booking = Bookings::where('status', 1)->get();
+        return view('admin.pages.kindrooms.list', compact('kindrooms','contact','booking'));
     }
 
     /**
@@ -29,7 +33,9 @@ class KindRoomsController extends Controller
     public function create()
     {
         $category = Category::where('status', 1)->get();
-        return view('admin.pages.kindrooms.create', compact('category'));
+        $contact = Contacts::all();
+        $booking = Bookings::where('status', 1)->get();
+        return view('admin.pages.kindrooms.create', compact('category','contact','booking'));
     }
 
     /**

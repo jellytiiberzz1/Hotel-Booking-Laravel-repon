@@ -4,53 +4,80 @@ $.ajaxSetup({
     }
 });
 $(document).ready(function () {
-    $('.edit').click(function () {
-        $('.error').hide();
+    $('.editCate').click(function () {
+        $('.errorName').hide();
+        $('.errorPrice').hide();
+        $('.errorUSD').hide();
+        $('.errorDescription').hide();
+        $('.errorImage').hide();
         let id = $(this).data('id');
-        //Edit
         $.ajax({
             url: '/admin/category/' + id + '/edit',
             dataType: 'json',
             type: 'get',
-            success: function ($result) {
-                console.log($result);
-                $('.name').val($result.name);
-                $('.title').text($result.name);
-                if ($result.status == 1) {
+            success: function (data) {
+                $('.name').val(data.category.name);
+                $('.price').val(data.category.price);
+                $('.usd').val(data.category.usd);
+                $('.sale').val(data.category.sale);
+                $('.imageThu').attr('src', '/img/upload/category/' + data.category.image);
+                CKEDITOR.instances['demo'].setData(data.category.description);
+                if (data.category.status == 1) {
                     $('.ht').attr('selected', 'selected');
                 } else {
                     $('.kht').attr('selected', 'selected');
                 }
             }
         });
-        $('.update').click(function () {
-            let ten = $('.name').val();
-            let status = $('.status').val();
+        $('#updateCategory').on('submit', function (event) {
+            //chặn form submit
+            event.preventDefault();
             $.ajax({
-                url: '/admin/category/' + id,
-                data: {
-                    name: ten,
-                    status: status
-                },
-                type: 'put',
-                dataType: 'json',
-                success: function ($result) {
-                    console.log($result);
-                    if ($result.error == 'true') {
-                        $('.error').show();
-                        $('.error').text($result.message.name[0]);
+                url: '/admin/updateCate/' + id,
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                cache: false,
+                type: 'post',
+                success: function (data) {
+                    console.log(data);
+                    if (data.error == 'true') {
+                        if (data.message.image) {
+                            $('.errorImage').show();
+                            $('.errorImage').text(data.message.image[0]);
+                            $('.image').val('');
+                        }
+                        if (data.message.name) {
+                            $('.errorName').show();
+                            $('.errorName').text(data.message.name[0]);
+                            $('.name').val('');
+                        }
+                        if (data.message.price) {
+                            $('.errorPrice').show();
+                            $('.errorPrice').text(data.message.price[0]);
+                            $('.price').val('');
+                        }
+                        if (data.message.usd) {
+                            $('.errorUSD').show();
+                            $('.errorUSD').text(data.message.usd[0]);
+                            $('.usd').val('');
+                        }
+                        if (data.message.description) {
+                            $('.errorDescription').show();
+                            $('.errorDescription').text(data.message.description[0]);
+                            $('.description').val('');
+                        }
                     } else {
-                        toastr.success($result.success, 'Thông báo', {timeOut: 5000});
+                        toastr.success(data.result, 'Thông báo', {timeOut: 5000});
                         $('#edit').modal('hide');
                         location.reload();
                     }
-
                 }
             });
         });
     });
     //Delete category
-    $('.delete').click(function () {
+    $('.deleteCate').click(function () {
         let id = $(this).data('id');
         $('.del').click(function () {
             $.ajax({
@@ -159,14 +186,15 @@ $(document).ready(function () {
             }
         });
     });
-    //Edit product
+    //Edit room
     $('.editRooms').click(function () {
         $('.errorNumber_room').hide();
-        $('.errorPrice').hide();
-        $('.errorSale').hide();
-        $('.errorImage').hide();
-        $('.errorDescription').hide();
-        $('.errorCreated_at').hide();
+        $('.errorName').hide();
+        $('.errorAddress').hide();
+        $('.errorCMND').hide();
+        $('.errorPhone').hide();
+        $('.errorDate_from').hide();
+        $('.errorDate_to').hide();
         let id = $(this).data('id');
         $.ajax({
             url: '/admin/rooms/' + id + '/edit',
@@ -174,15 +202,18 @@ $(document).ready(function () {
             type: 'get',
             success: function (data) {
                 $('.number_room').val(data.room.number_room);
-                $('.price').val(data.room.price);
-                $('.sale').val(data.room.sale);
-                $('.imageThum').attr('src', '/img/upload/rooms/' + data.room.image);
+                $('.name').val(data.room.name);
+                $('.address').val(data.room.address);
+                $('.CMND').val(data.room.CMND);
+                $('.phone').val(data.room.phone);
                 if (data.room.status == 1) {
-                    $('.ht').attr('selected', 'selected');
+                    $('.t').attr('selected', 'selected');
+                    if (data.room.status == 2)
+                        $('.dt').attr('selected', 'selected');
+
                 } else {
-                    $('.kht').attr('selected', 'selected');
+                    $('.sd').attr('selected', 'selected');
                 }
-                CKEDITOR.instances['demo'].setData(data.room.description);
                 let html1 = '';
                 $.each(data.category, function (key, value) {
                     if (data.room.idCategory == value['id']) {
@@ -209,7 +240,7 @@ $(document).ready(function () {
                     }
                 });
                 $('.roomkindRooms').html(html2);
-                var unixtimestamp = data.room.created_at;
+                var unixtimestamp = data.room.date_to;
                 var date = new Date(unixtimestamp);
                 var year = date.getFullYear();
                 var month = date.getMonth() + 1;
@@ -217,8 +248,22 @@ $(document).ready(function () {
                     month = ("0" + month);
                 }
                 var day = date.getDate();
-                var created_at = year + "-" + month + "-" + day;
-                $('.created_at').val(created_at);
+                var date_to = year + "-" + month + "-" + day;
+                $('.date_to').val(date_to);
+                //
+                var unixtimestamp2 = data.room.date_from;
+                var date2 = new Date(unixtimestamp2);
+                var year2 = date2.getFullYear();
+                var month2 = date2.getMonth() + 1;
+                if (month2 < 10) {
+                    month2 = ("0" + month2);
+                }
+                var day2 = date.getDate();
+                var date_from = year2 + "-" + month2 + "-" + day2;
+
+                $('.date_from').val(date_from);
+
+
             }
         });
         $('#updateRoom').on('submit', function (event) {
@@ -234,35 +279,35 @@ $(document).ready(function () {
                 success: function (data) {
                     console.log(data);
                     if (data.error == 'true') {
-                        if (data.message.image) {
-                            $('.errorImage').show();
-                            $('.errorImage').text(data.message.image[0]);
-                            $('.image').val('');
+                        if (data.message.name) {
+                            $('.errorName').show();
+                            $('.errorName').text(data.message.name[0]);
+                            $('.name').val('');
                         }
                         if (data.message.number_room) {
                             $('.errorNumber_room').show();
                             $('.errorNumber_room').text(data.message.number_room[0]);
-                            $('.name').val('');
+                            $('.number_room').val('');
                         }
-                        if (data.message.price) {
-                            $('.errorPrice').show();
-                            $('.errorPrice').text(data.message.price[0]);
-                            $('.price').val('');
+                        if (data.message.CMND) {
+                            $('.errorCMND').show();
+                            $('.errorCMND').text(data.message.CMND[0]);
+                            $('.CMND').val('');
                         }
-                        if (data.message.sale) {
-                            $('.errorSale').show();
-                            $('.errorSale').text(data.message.sale[0]);
-                            $('.sale').val('');
+                        if (data.message.phone) {
+                            $('.errorPhone').show();
+                            $('.errorPhone').text(data.message.phone[0]);
+                            $('.phone').val('');
                         }
-                        if (data.message.description) {
-                            $('.errorDescription').show();
-                            $('.errorDescription').text(data.message.description[0]);
-                            $('.description').val('');
+                        if (data.message.date_from) {
+                            $('.errorDate_from').show();
+                            $('.errorDate_from').text(data.message.date_from[0]);
+                            $('.date_from').val('');
                         }
-                        if (data.message.created_at) {
-                            $('.errorCreated_at').show();
-                            $('.errorCreated_at').text(data.message.created_at[0]);
-                            $('.created_at').val('');
+                        if (data.message.date_to) {
+                            $('.errorDate_to').show();
+                            $('.errorDate_to').text(data.message.date_to[0]);
+                            $('.date_to').val('');
                         }
                     } else {
                         toastr.success(data.result, 'Thông báo', {timeOut: 5000});
@@ -274,14 +319,14 @@ $(document).ready(function () {
         });
     });
     //Delete Rooms
-    $('.deleteRooms').click(function(){
+    $('.deleteRooms').click(function () {
         let id = $(this).data('id');
-        $('.delRooms').click(function(){
+        $('.delRooms').click(function () {
             $.ajax({
-                url : '/admin/rooms/'+id,
-                type : 'delete',
-                dataType : 'json',
-                success : function(data){
+                url: '/admin/rooms/' + id,
+                type: 'delete',
+                dataType: 'json',
+                success: function (data) {
                     toastr.success(data.result, 'Thông báo', {timeOut: 5000});
                     $('#delete').modal('hide');
                     location.reload();
@@ -438,14 +483,14 @@ $(document).ready(function () {
             });
         });
     });
-    $('.deleteService').click(function(){
+    $('.deleteService').click(function () {
         let id = $(this).data('id');
-        $('.delService').click(function(){
+        $('.delService').click(function () {
             $.ajax({
-                url : '/admin/service/'+id,
-                type : 'delete',
-                dataType : 'json',
-                success : function(data){
+                url: '/admin/service/' + id,
+                type: 'delete',
+                dataType: 'json',
+                success: function (data) {
                     toastr.success(data.result, 'Thông báo', {timeOut: 5000});
                     $('#delete').modal('hide');
                     location.reload();

@@ -41,11 +41,9 @@
                             <td>
                                 <span class="label label-success">
                                 @if($value->role==1)
-                                        {{ "Nhân viên" }}
-                                    @elseif($value->role==2)
                                         {{ "Admin" }}
-                                    @elseif($value->role==0)
-                                        {{ "User" }}
+                                    @elseif($value->role==2)
+                                        {{ "Nhân viên" }}
                                     @endif
                                 </span>
                             </td>

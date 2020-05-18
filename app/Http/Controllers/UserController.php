@@ -140,7 +140,6 @@ class UserController extends Controller
     }
     public function reservation(){
         $user = User::find(Auth::user()->id);
-
         $booking = Bookings::where('idUser',$user->id)->get();
         return view('client.pages.reservation', compact( 'booking'));
     }

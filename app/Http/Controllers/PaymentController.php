@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Bill;
 use App\Bookings;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Rooms;
@@ -42,9 +43,9 @@ class PaymentController extends Controller
     }
     public function index(Request $request)
     {
-        $value = $request->session()->get('id');
-        $room = Rooms::where('id',$value)->first();
-        return view('client.pages.paypal', compact('room'));
+        $value = $request->session()->get('slug');
+        $cate = Category::where('slug',$value)->first();
+        return view('client.pages.paypal', compact('cate'));
     }
     public function payWithpaypal(Request $request)
     {

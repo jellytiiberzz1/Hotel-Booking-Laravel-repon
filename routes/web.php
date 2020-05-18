@@ -18,6 +18,7 @@ Route::group(['prefix'=>'admin', 'middleware' => 'adminMiddleware'],function (){
     Route::get('','AdminController@index');
     Route::get('logout','AdminController@logout');
     Route::resource('category','CategoryController');
+    Route::post('updateCate/{id}','CategoryController@update');
     Route::resource('kindrooms','KindRoomsController');
     Route::resource('rooms','RoomsController');
     Route::post('updateRoom/{id}','RoomsController@update');
@@ -37,11 +38,11 @@ Route::get('contact','ShowController@contact');
 Route::post('/message','ShowController@contactPost');
 
 Route::resource('booking','BookingsController');
-Route::get('dat-phong-{id}','BookingsController@addBook')->name('addBook');
+Route::get('dat-{slug}','BookingsController@addBook')->name('addBook');
 //Route::get('dat_phong','BookingsController@detail')->name('detail');
 Route::resource('customer','CustomerController');
 
-Route::get('chi-tiet-phong-{slug}', 'ShowController@getDetail');
+Route::get('chi-tiet-{slug}', 'ShowController@getDetail');
 Route::get('/find','ShowController@findrooms');
 Route::post('/updateuser','ShowController@updateInfo')->name('updateinformation');
 

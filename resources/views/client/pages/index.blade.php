@@ -71,7 +71,7 @@
                                                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                                                 <select name="key" id="key" class="form-control">
                                                     <option value="">Chọn loại phòng</option>
-                                                    @foreach($room2 as $value)
+                                                    @foreach($cate as $value)
                                                     <option value="{{$value->id}}">{{$value->name}}</option>
                                                    @endforeach
                                                 </select>
@@ -255,31 +255,24 @@
                         </div>
                     </div>
                 </div>
-                @foreach($room3 as $room)
+                @foreach($cate as $room)
                     <div class="col-lg-6">
                         <div class="room-wrap d-md-flex">
-                            <a href="chi-tiet-phong-{{$room->slug}}" class="img"
-                               style="background-image: url(img/upload/rooms/{{$room->image}});"></a>
+                            <a href="chi-tiet-{{$room->slug}}" class="img"
+                               style="background-image: url(img/upload/category/{{$room->image}});"></a>
                             <div class="half left-arrow d-flex align-items-center">
                                 <div class="text p-4 p-xl-5 text-center">
                                     <p class="star mb-0"><span class="ion-ios-star"></span><span
                                             class="ion-ios-star"></span><span class="ion-ios-star"></span><span
                                             class="ion-ios-star"></span><span class="ion-ios-star"></span></p>
                                     <p class="mb-0">
-                                        @if($room->sale==0)
-                                            <strike style="color: #333333">{{number_format($room->sale)}}</strike><br>
                                             <span class="price mr-1">{{number_format($room->price)}}</span>
-                                        @else
-                                            <strike
-                                                style="color: #333333">@if($room->sale==0)@else {{number_format($room->price)}}@endif</strike>
                                             <br>
-                                            <span class="price mr-1">{{number_format($room->sale)}}</span>
-                                        @endif
                                         <span class="per">Một đêm</span>
                                     </p>
                                     <h3 class="mb-3"><a
-                                            href="chi-tiet-phong-{{$room->slug}}">{{$room->Category->name}}</a></h3>
-                                    <p class="pt-1"><a href="chi-tiet-phong-{{$room->slug}}"
+                                            href="chi-tiet-{{$room->slug}}">{{$room->name}}</a></h3>
+                                    <p class="pt-1"><a href="chi-tiet-{{$room->slug}}"
                                                        class="btn-custom px-3 py-2">Chi tiết về
                                             phòng
                                             <span class="icon-long-arrow-right"></span></a></p>

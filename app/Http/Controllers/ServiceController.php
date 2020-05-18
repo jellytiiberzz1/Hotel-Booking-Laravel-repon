@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Bookings;
+use App\Contacts;
 use App\Rooms;
 use App\Service;
 use App\ServiceSlug;
@@ -19,7 +21,9 @@ class ServiceController extends Controller
     public function index()
     {
         $service = Service::paginate(5);
-        return view('admin.pages.service.list', compact('service'));
+        $contact = Contacts::all();
+        $booking = Bookings::where('status', 1)->get();
+        return view('admin.pages.service.list', compact('service','contact','booking'));
     }
 
     /**
@@ -31,7 +35,9 @@ class ServiceController extends Controller
     {
         $rooms = Rooms::where('status', 0)->get();
         $serviecSlug = ServiceSlug::where('status', 1)->get();
-        return view('admin.pages.service.create', compact('rooms', 'serviecSlug'));
+        $contact = Contacts::all();
+        $booking = Bookings::where('status', 1)->get();
+        return view('admin.pages.service.create', compact('rooms', 'serviecSlug','contact','booking'));
     }
 
     /**
