@@ -7,7 +7,10 @@ use App\Bookings;
 use App\Category;
 use App\Customer;
 use App\Http\Requests\BookingRequest;
+use App\Mail\HotelMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 
 class BookingsController extends Controller
@@ -22,7 +25,10 @@ class BookingsController extends Controller
     {
         $value = $request->session()->get('slug');
         $cate = Category::where('slug',$value)->first();
-        $booking = Bookings::where('idCategory',$cate->id)->first();
+        $booking = Bookings::where('idCategory',$cate->id)
+            ->where('idUser',Auth::id())
+            ->first
+            ();
         return view('client.pages.confirmation', compact('cate', 'booking'));
     }
 
@@ -45,11 +51,10 @@ class BookingsController extends Controller
     public function store(BookingRequest $request )
     {
         $data = $request->except('_token');
-        Bookings::create($data);
+        $booking = Bookings::create($data);
         $customer = $request->except(['_token', 'idCategory', 'amount','code_order', 'date_from', 'date_to', 'additional_information']);
         Customer::create($customer);
-//        Mail::to($booking->email)->send(new BookingHotelMail($booking));
-
+        Mail::to($booking->email)->send(new HotelMail($booking));
 //        return back()->with('thongbao', 'Đã đặt phòng thành công');
         return redirect()->route('payment');
     }

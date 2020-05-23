@@ -26,7 +26,11 @@ Route::group(['prefix'=>'admin', 'middleware' => 'adminMiddleware'],function (){
     Route::resource('service','ServiceController');
     Route::post('updateService/{id}','ServiceController@update');
     Route::resource('member','MemberController');
+    Route::post('updatemember/{id}','MemberController@update');
     Route::resource('adminbooking','ReservationmanagerController');
+    Route::resource('customer','CustomerController');
+    Route::resource('revenue','RevenueController');
+    Route::resource('error','ErrorController');
 });
 Route::get('logout','UserController@logout');
 
@@ -40,7 +44,7 @@ Route::post('/message','ShowController@contactPost');
 Route::resource('booking','BookingsController');
 Route::get('dat-{slug}','BookingsController@addBook')->name('addBook');
 //Route::get('dat_phong','BookingsController@detail')->name('detail');
-Route::resource('customer','CustomerController');
+
 
 Route::get('chi-tiet-{slug}', 'ShowController@getDetail');
 Route::get('/find','ShowController@findrooms');

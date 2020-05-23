@@ -10,7 +10,7 @@
                         <tr>
                             <td align="left" valign="middle" style="width:500px;height:60px">
                                 <a href="#" style="border:0" target="_blank" width="130" height="35" style="display:block;border:0px">
-                                    <i class="fad fa-hotel" height="100" width="115" style="display:block;border:0px;float: left;"></i> <b style="float: left;line-height: 100px;color: red;font-size: 20px;">Novotel</b>
+                                    <i class="fad fa-hotel" height="100" width="115" style="display:block;border:0px;float: left;"></i> <b style="float: left;line-height: 100px;color: red;font-size: 20px;">Supportel</b>
                                 </a>
                             </td>
                         </tr>
@@ -30,12 +30,12 @@
                         <tr>
                             <td align="left" valign="middle" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;padding:0 10px 20px 10px;line-height:17px">
                                 Chào {{ $booking->name }},
-                                <br> Cám ơn bạn đã đặt phòng tại khách sạn NOVOTEL
+                                <br> Cám ơn bạn đã đặt phòng tại khách sạn SUPPORTEL
                                 <br>
                                 <br> Đơn đặt phòng của bạn đang
                                 <b>được kiểm tra</b>
                                 <b>xác nhận</b> (trong vòng 24h)
-                                <br> Chúng tôi sẽ thông tin <b>trạng thái đơn đặt phòng</b> trong email tiếp theo.
+                                <br> Chúng tôi sẽ sớm thông báo <b>trạng thái đơn đặt phòng</b> trong email tiếp theo.
                                 <br> Bạn vui lòng kiểm tra email thường xuyên nhé.
                             </td>
                         </tr>
@@ -55,28 +55,18 @@
                                 <span style="font-size:12px">({{ $booking->created_at }})</span>
                             </td>
                         </tr>
-                        @foreach($booking as $o)
+
                             <tr>
                                 <td align="left" valign="top" style="width:120px;padding-left:15px">
                                     <a href="#_" style="border:0">
-                                        <img src="{{asset('img/upload/rooms')}}{{ '/'.$o->Rooms->image }}" width="120"
+                                        <img src="{{asset('img/upload/category')}}{{ '/'.$booking->category->image }}" width="120"
                                              height="120" width="120" style="display:block;border:0px">
                                     </a>
                                 </td>
                                 <td align="left" valign="top">
                                     <table style="width:100%" cellpadding="0" cellspacing="0" border="0">
                                         <tbody>
-                                        <tr>
-                                            <td align="left" valign="top" style="width:120px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;padding-left:15px;padding-right:10px;line-height:20px;padding-bottom:5px">
-                                                <b>Phòng đã đặt</b>
-                                            </td>
-                                            <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-bottom:5px">:</td>
-                                            <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-left:10px;padding-bottom:5px">
-                                                <a href="#" style="color:#115fff;text-decoration:none" target="_blank">
-                                                    {{ $o->Rooms->number_room }}
-                                                </a>
-                                            </td>
-                                        </tr>
+
                                         <tr>
                                             <td align="left" valign="top" style="width:120px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;padding-left:15px;padding-right:10px;line-height:20px;padding-bottom:5px">
                                                 <b>Tên Khách Sạn</b>
@@ -84,9 +74,41 @@
                                             <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-bottom:5px">:</td>
                                             <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-left:10px;padding-bottom:5px">
                                                 <a href="#" style="color:#115fff;text-decoration:none" target="_blank">
-                                                    NOVOTEL
+                                                    Supportel
                                                 </a>
-                                                - 098765432
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" valign="top" style="width:120px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;padding-left:15px;padding-right:10px;line-height:20px;padding-bottom:5px">
+                                                <b>Phòng đã đặt</b>
+                                            </td>
+                                            <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-bottom:5px">:</td>
+                                            <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-left:10px;padding-bottom:5px">
+                                                <a href="#" style="color:#115fff;text-decoration:none" target="_blank">
+                                                    {{$booking->Category->name }}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" valign="top" style="width:120px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;padding-left:15px;padding-right:10px;line-height:20px;padding-bottom:5px">
+                                                <b>Ngày nhận phòng</b>
+                                            </td>
+                                            <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-bottom:5px">:</td>
+                                            <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-left:10px;padding-bottom:5px">
+                                                <a href="#" style="color:#115fff;text-decoration:none" target="_blank">
+                                                    {{$booking->date_from }}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" valign="top" style="width:120px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;padding-left:15px;padding-right:10px;line-height:20px;padding-bottom:5px">
+                                                <b>Ngày trả phòng</b>
+                                            </td>
+                                            <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-bottom:5px">:</td>
+                                            <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-left:10px;padding-bottom:5px">
+                                                <a href="#" style="color:#115fff;text-decoration:none" target="_blank">
+                                                    {{$booking->date_to }}
+                                                </a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -95,7 +117,7 @@
                                             </td>
                                             <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-bottom:5px">:</td>
                                             <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-left:10px;padding-bottom:5px">
-                                                {{ number_format($o->price) }}
+                                                {{ number_format($booking->count) }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -104,7 +126,7 @@
                                             </td>
                                             <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-bottom:5px">:</td>
                                             <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-left:10px;padding-bottom:5px">
-                                                <b>{{ $order->name }}</b> - {{ $order->phone }}
+                                                <b>{{ $booking->name }}</b> - {{ $booking->phone }}
                                                 <br>
                                                 {{ $booking->address }}
                                             </td>
@@ -113,11 +135,10 @@
                                     </table>
                                 </td>
                             </tr>
-                        @endforeach
                         <tr>
                             <td colspan="2" align="center" valign="top" style="padding-top:20px;padding-bottom:20px;border-bottom:1px solid #ebebeb">
                                 <a href="#" style="border:0px" target="_blank">
-                                    <img src="https://i.imgur.com/f92hL68.jpg" height="29" width="191" alt="Chi tiết đơn hàng" style="border:0px">
+                                    <img src="https://i.imgur.com/f92hL68.jpg" height="29" width="191" alt="Chi tiết đặt phòng" style="border:0px">
                                 </a>
                             </td>
                         </tr>
@@ -132,10 +153,10 @@
                         <tr>
                             <td align="center" valign="middle" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-bottom:5px">
                                 Đây là thư tự động từ hệ thống. Vui lòng không trả lời email này.
-                                <br> Nếu có bất kỳ thắc mắc hay cần giúp đỡ, Bạn vui lòng gọi điện hotline : 098765432
+                                <br> Nếu có bất kỳ thắc mắc hay cần giúp đỡ, Bạn vui lòng gọi điện hotline : 0702158015<br>
                                 <b style="font-family:Arial,Helvetica,sans-serif;font-size:13px;text-decoration:none;font-weight:bold">Trung tâm trợ giúp</b> của chúng tôi tại địa chỉ:
-                                <a href="#" style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#0066cc;text-decoration:none;font-weight:bold" target="_blank">
-                                    mikywaylady@gmail.com
+                                <a href="mailto:ducthach0608@gmail.com" style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#0066cc;text-decoration:none;font-weight:bold" target="_blank">
+                                   ducthach0608@gmail.com
                                 </a>
                             </td>
                         </tr>

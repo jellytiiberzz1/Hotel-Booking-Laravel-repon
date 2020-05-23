@@ -146,7 +146,7 @@
                                     <div class="alert alert-danger errorDate_from"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Ngày vào</label>
+                                    <label>Ngày ra</label>
                                     <input class="form-control date_to" type="date" name="date_to">
                                     <div class="alert alert-danger errorDate_to"></div>
                                 </div>

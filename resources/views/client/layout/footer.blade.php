@@ -40,9 +40,9 @@
                         <ul>
                             <li><span class="icon icon-map-marker"></span><span class="text">Duy Tan UNIVERSITY</span>
                             </li>
-                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+84 702158015</span></a>
+                            <li><a href="tel://+84702158015"><span class="icon icon-phone"></span><span class="text">+84 702158015</span></a>
                             </li>
-                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ducthach0608@gmail.com</span></a>
+                            <li><a href="mailto:ducthach0608@gmail.com"><span class="icon icon-envelope"></span><span class="text">ducthach0608@gmail.com</span></a>
                             </li>
                         </ul>
                     </div>

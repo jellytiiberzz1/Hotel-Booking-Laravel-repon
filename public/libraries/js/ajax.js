@@ -498,21 +498,7 @@ $(document).ready(function () {
             });
         });
     });
-    $('.deleteMember').click(function () {
-        let id = $(this).data('id');
-        $('.delMember').click(function () {
-            $.ajax({
-                url: '/admin/member/' + id,
-                dataType: 'json',
-                type: 'delete',
-                success: function ($data) {
-                    toastr.success($data.result, 'Thông báo', {timeOut: 5000});
-                    $('#delete').modal('hide');
-                    location.reload();
-                }
-            });
-        });
-    });
+
     //Edit ProductType
     $('.editBooking').click(function () {
         $('.error').hide();
@@ -571,8 +557,134 @@ $(document).ready(function () {
             });
         });
     });
+    $('.editMember').click(function () {
+        $('.errorName').hide();
+        $('.errorAddress').hide();
+        $('.errorCMND').hide();
+        $('.errorPhone').hide();
+        $('.errorBirthday').hide();
+        $('.errorEmail').hide();
+        $('.errorAvatar').hide();
+        let id = $(this).data('id');
+        $.ajax({
+            url: '/admin/member/' + id + '/edit',
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                $('.name').val(data.member.name);
+                $('.address').val(data.member.address);
+                $('.CMND').val(data.member.CMND);
+                $('.phone').val(data.member.phone);
+                $('.email').val(data.member.email);
+                $('.imageAva').attr('src', '/img/upload/avatar/' + data.member.avatar);
+                if (data.member.status == 0) {
+                    $('.ht').attr('selected', 'selected');
+                } else {
+                    $('.kht').attr('selected', 'selected');
+                }
+                if (data.member.gender == 1) {
+                    $('.nam').attr('selected', 'selected');
+                } else {
+                    $('.nu').attr('selected', 'selected');
+                }
+                if (data.member.role == 1) {
+                    $('.ad').attr('selected', 'selected');
+                } else {
+                    $('.nv').attr('selected', 'selected');
+                }
+                var unixtimestamp = data.member.birthday;
+                var date = new Date(unixtimestamp);
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                if (month < 10) {
+                    month = ("0" + month);
+                }
+                var day = date.getDate();
+                if (day < 10) {
+                    day = ("0" + day);
+                }
+                var birthday = year + "-" + month + "-" + day;
+                $('.birthday').val(birthday);
+            }
+        });
+        $('#updateUser').on('submit', function (event) {
+            //chặn form submit
+            event.preventDefault();
+            $.ajax({
+                url: '/admin/updatemember/' + id,
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                cache: false,
+                type: 'post',
+                success: function (data) {
+                    console.log(data);
+                    if (data.error == 'true') {
+                        if (data.message.avartar) {
+                            $('.errorAvatar').show();
+                            $('.errorAvatar').text(data.message.avatar[0]);
+                            $('.avatar').val('');
+                        }
+                        if (data.message.name) {
+                            $('.errorName').show();
+                            $('.errorName').text(data.message.name[0]);
+                            $('.name').val('');
+                        }
+                        if (data.message.CMND) {
+                            $('.errorCMND').show();
+                            $('.errorCMND').text(data.message.CMND[0]);
+                            $('.CMND').val('');
+                        }
+                        if (data.message.phone) {
+                            $('.errorPhone').show();
+                            $('.errorPhone').text(data.message.phone[0]);
+                            $('.phone').val('');
+                        }
+                        if (data.message.email) {
+                            $('.errorEmail').show();
+                            $('.errorEmail').text(data.message.email[0]);
+                            $('.email').val('');
+                        }
+                    } else {
+                        toastr.success(data.result, 'Thông báo', {timeOut: 5000});
+                        $('#edit').modal('hide');
+                        location.reload();
+                    }
+                }
+            });
+        });
+    });
+    $('.deleteMember').click(function () {
+        let id = $(this).data('id');
+        $('.delMember').click(function () {
+            $.ajax({
+                url: '/admin/member/' + id,
+                dataType: 'json',
+                type: 'delete',
+                success: function ($data) {
+                    toastr.success($data.result, 'Thông báo', {timeOut: 5000});
+                    $('#delete').modal('hide');
+                    location.reload();
+                }
+            });
+        });
+    });
+    $('.deleteCustomer').click(function () {
+        let id = $(this).data('id');
+        $('.delCustomer').click(function () {
+            $.ajax({
+                url: '/admin/customer/' + id,
+                dataType: 'json',
+                type: 'delete',
+                success: function ($data) {
+                    toastr.success($data.result, 'Thông báo', {timeOut: 5000});
+                    $('#delete').modal('hide');
+                    location.reload();
+                }
+            });
+        });
+    });
 });
-
 
 
 
